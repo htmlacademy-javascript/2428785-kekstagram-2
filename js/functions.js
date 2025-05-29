@@ -1,50 +1,47 @@
-let голоден = true;
-let конфетыСъедены = 0;
-
-while (голоден) {
-  конфетыСъедены++;
-  console.log("Съедена конфета " + конфетыСъедены);
-
-  // Допустим, ты наелся после 5 конфет
-
-  if (конфетыСъедены === 5) {
-    голоден = false;
+function generateComment() {
+  const sentences = [];
+  sentences.push(getRandomArrayItem(MESSAGES));
+  if (Math.random() > 0.5) {
+    sentences.push(getRandomArrayItem(MESSAGES));
   }
+  return {
+    id: globalCommentId++,
+    avatar: `img/avatar-${getRandomInt(1,6)}.svg`,
+    message: sentences.join(' '),
+    name: getRandomArrayItem(NAMES)
+  };
 }
 
-const checkLength = (string, maxSymbols) => string.length <= maxSymbols;
-
-// сonsole.log(checkLength('проверяемая строка', 20));
-// console.log(checkLength('проверяемая строка', 18));
-// console.log(checkLength('проверяемая строка', 10));
-
-const isPalindrom = (string) => {
-    string = string.replaceAll(' ', '').toLowerCase();
-    let reversed = '';
-    for (let i = string.length - 1; i >= 0; i--) {
-        reversed += string[i];
-    }
-    return string === reversed;
-};
-
-
-// console.log(isPalindrom('топот'));
-// console.log(isPalindrom('ДовОд'));
-// console.log(isPalindrom('Кекс'));
-
-const getNumber = (text) => {
-let result = '';
-for(let j=0; j<text.length; j++){
-    const attempt = parseInt(text[j], 10);
-    if(!isNaN(attempt)){
-        result = result + text[j]
-    }
+function generateComments() {
+  const count = getRandomInt(0, 30);
+  const comments = [];
+  for (let i = 0; i < count; i++) {
+    comments.push(generateComment());
+  }
+  return comments;
 }
-    return parseInt(result, 10);
-};
 
-console.log(getNumber('2023 год'))
-console.log(getNumber('ECMAScript 2022'))
-console.log(getNumber('1 кефир, 0.5 батона'))
-console.log(getNumber('агент 007'))
-console.log(getNumber('а я томат'))
+function generatePhoto(i) {
+  return {
+    id: i,
+    url: `photos/${i}.jpg`,
+    description: getRandomArrayItem(DESCRIPTIONS),
+    likes: getRandomInt(15, 200),
+    comments: generateComments(),
+  };
+}
+
+function generatePhotos() {
+  const photos = [];
+  for (let i = 1; i <= 25; i++) {
+    photos.push(generatePhoto(i));
+  }
+  return photos;
+}
+
+export {
+  generateComment,
+  generateComments,
+  generatePhoto,
+  generatePhotos
+}
