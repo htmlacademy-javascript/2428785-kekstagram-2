@@ -1,8 +1,6 @@
-import { MESSAGES, NAMES, DESCRIPTIONS, globalCommentId } from "./data.js"
-
-import { getRandomInt, getRandomArrayItem } from "./utils.js";
-
-import { generateComment, generateComments, generatePhoto, generatePhotos } from "./functions.js";
+import { generatePhotos } from "./data.js";
+import { renderCards } from "./render.js";
 
 const photos = generatePhotos();
-console.log(photos);
+
+renderCards(photos)
