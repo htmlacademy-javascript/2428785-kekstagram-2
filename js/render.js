@@ -13,7 +13,6 @@ export const renderCards = (pictures) => {
     image.alt = description;
     card.querySelector('.picture__likes').textContent = likes;
     card.querySelector('.picture__comments').textContent = comments.length;
-
     fragment.append(card);
   });
 
