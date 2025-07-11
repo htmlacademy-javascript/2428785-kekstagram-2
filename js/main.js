@@ -3,4 +3,4 @@ import { renderCards } from "./render.js";
 
 const photos = generatePhotos();
 
-renderCards(photos)
+renderCards(photos);
