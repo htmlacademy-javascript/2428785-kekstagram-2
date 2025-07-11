@@ -1,23 +1,12 @@
-import { photos } from "./main.js";
-import { container } from "./render.js";
-
 const bigPictureNode = document.querySelector('.big-picture');
 const bigPictureImgNode = bigPictureNode.querySelector('.big-picture__img').querySelector('img');
 const likesCountNode = bigPictureNode.querySelector('.likes-count');
 const socialCommentsNode = bigPictureNode.querySelector('.social__comments');
 const socialCommentsTemplate = socialCommentsNode.querySelector('.social__comment');
 const commentsCaptionNode = bigPictureNode.querySelector('.social__caption');
-const commentsCountNode = bigPictureNode.querySelector('social__comment-count');
+const commentsCountNode = bigPictureNode.querySelector('.social__comment-count');
 const commentsLoaderNode = bigPictureNode.querySelector('.social__comments-loader');
 const bigPictureCancelNode = bigPictureNode.querySelector('.big-picture__cancel');
-
-container.addEventListener('click', (evt) => {
-  const currentPictureNode = evt.target.closest('.picture');
-
-  if (currentPictureNode) {
-    openBigPicture(currentPictureNode.dataset.pictureId)
-  }
-})
 
 const onBigPictureCancelClick = () => {
   closeBigPicture();
@@ -34,8 +23,7 @@ const closeBigPicture = () => {
   document.removeEventListener('keydown', onEscKeydown);
 }
 
-const openBigPicture = (pictureId) => {
-  const currentPhoto = photos.find((photo) => photo.id === Number(pictureId));
+const openBigPicture = (currentPhoto) => {
   const socialCommentsFragment = document.createDocumentFragment();
 
   bigPictureImgNode.src = currentPhoto.url;
@@ -47,7 +35,7 @@ const openBigPicture = (pictureId) => {
 
     socialCommentNode.querySelector('.social__picture').src = comment.avatar;
     socialCommentNode.querySelector('.social__picture').alt = comment.name;
-    socialCommentNode.querySelector('social__text').textContent = comment.message;
+    socialCommentNode.querySelector('.social__text').textContent = comment.message;
 
     socialCommentsFragment.appendChild(socialCommentNode)
   });

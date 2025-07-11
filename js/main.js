@@ -4,5 +4,3 @@ import { renderCards } from "./render.js";
 const photos = generatePhotos();
 
 renderCards(photos);
-
-export { photos }
