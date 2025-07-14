@@ -1,5 +1,3 @@
-const COUNT_STEP = 5;
-
 const bigPictureNode = document.querySelector('.big-picture');
 const bigPictureImgNode = bigPictureNode.querySelector('.big-picture__img').querySelector('img');
 const likesCountNode = bigPictureNode.querySelector('.likes-count');
@@ -8,13 +6,6 @@ const socialCommentsTemplate = socialCommentsNode.querySelector('.social__commen
 const commentsCaptionNode = bigPictureNode.querySelector('.social__caption');
 const commentsLoaderNode = bigPictureNode.querySelector('.social__comments-loader');
 const bigPictureCancelNode = bigPictureNode.querySelector('.big-picture__cancel');
-const renderedStatisticNode = bigPictureNode.querySelector('.social__comment-shown-count');
-const totalStatisticNode = bigPictureNode.querySelector('.social__comment-total-count');
-
-let currentCount = 0;
-let comments = [];
-
-socialCommentsNode.innerHTML = '';
 
 const onBigPictureCancelClick = () => {
   closeBigPicture();
@@ -64,28 +55,15 @@ const renderNextComments = () => {
     socialCommentsFragment.appendChild(socialCommentNode)
   });
   socialCommentsNode.appendChild(socialCommentsFragment);
+  commentsCaptionNode.textContent = currentPhoto.description;
+  commentsCountNode.classList.add('hidden');
+  commentsLoaderNode.classList.add('hidden');
 
-  renderedStatisticNode.textContent = renderedCommentsLength;
+  bigPictureNode.classList.remove('hidden');
+  bigPictureCancelNode.addEventListener('click', onBigPictureCancelClick);
+  document.body.classList.add('modal-open');
+  document.addEventListener('keydown', onEscKeydown);
 
-  if (renderedCommentsLength >= comments.length) {
-    commentsLoaderNode.classList.add('hidden');
-  }
-
-  currentCount += COUNT_STEP;
-};
-
-const clearComments = () => {
-  currentCount = 0;
-  socialCommentsNode.innerHTML = '';
-  commentsLoaderNode.classList.remove('hidden');
-  commentsLoaderNode.removeEventListener('click', renderNextComments);
-};
-
-function renderComments(currentPhotoComments) {
-  comments = currentPhotoComments;
-  renderNextComments();
-
-  commentsLoaderNode.addEventListener('click', renderNextComments);
-};
+}
 
 export { openBigPicture };
