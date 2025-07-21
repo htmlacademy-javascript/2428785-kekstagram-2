@@ -1,4 +1,4 @@
-import { openBigPicture } from "./modal";
+import { openBigPicture } from "./modal.js";
 
 const cardTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const container = document.querySelector('.pictures');
@@ -31,6 +31,7 @@ container.addEventListener('click', (evt) => {
   const currentPictureNode = evt.target.closest('.picture');
 
   if (currentPictureNode) {
+    evt.preventDefault();
     const pictureId = currentPictureNode.dataset.pictureId;
     const currentPhoto = localPhotos.find((photo) => photo.id === Number(pictureId));
     openBigPicture(currentPhoto)
