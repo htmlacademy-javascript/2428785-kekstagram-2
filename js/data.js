@@ -34,14 +34,10 @@ const generatePhoto = (i) => ({
   comments: generateComments(),
 });
 
-function generatePhotos() {
+export function generatePhotos() {
   const photos = [];
   for (let i = 1; i <= TOTAL_CARDS; i++) {
     photos.push(generatePhoto(i));
   }
   return photos;
-}
-
-export {
-  generatePhotos
 }
