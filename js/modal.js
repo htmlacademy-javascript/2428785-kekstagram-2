@@ -33,7 +33,7 @@ const closeBigPicture = () => {
   document.removeEventListener('keydown', onEscKeydown);
 };
 
-const openBigPicture = (currentPhoto) => {
+export const openBigPicture = (currentPhoto) => {
 
   bigPictureImgNode.src = currentPhoto.url;
   likesCountNode.textContent = currentPhoto.likes;
@@ -87,5 +87,3 @@ function renderComments(currentPhotoComments) {
 
   commentsLoaderNode.addEventListener('click', renderNextComments);
 };
-
-export { openBigPicture };

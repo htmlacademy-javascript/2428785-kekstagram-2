@@ -1,6 +1,7 @@
 import { generatePhotos } from "./data.js";
 import { renderCards } from "./render.js";
 import { initUploadModal } from "./form.js";
+import './effects-slider.js';
 
 const photos = generatePhotos();
 
