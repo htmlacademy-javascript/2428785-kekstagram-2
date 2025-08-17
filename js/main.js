@@ -1,10 +1,15 @@
-import { generatePhotos } from "./data.js";
 import { renderCards } from "./render.js";
 import { initUploadModal } from "./form.js";
 import './effects-slider.js';
+import { showAlert } from "./utils.js";
+import { getData } from "./api.js";
 
-const photos = generatePhotos();
+getData()
+  .then((photos) => {
+    renderCards(photos);
+  })
+  .catch(() => {
+    showAlert();
+  });
 
-renderCards(photos);
-
-initUploadModal ();
+initUploadModal();

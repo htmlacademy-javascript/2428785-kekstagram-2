@@ -1,27 +1,15 @@
-import { SCALE_MAX, SCALE_MIN, SCALE_STEP } from "./constants.js";
+import { sendData } from "./api.js";
+import { Popups, submitText } from "./constants.js";
+import { showPopup } from "./popup.js";
 import { isValid, resetValidation } from "./validation.js";
 
-const uploadForm = document.querySelector('.img-upload__form');
 const pageBody = document.querySelector('body');
-
 const uploadFileControl = uploadForm.querySelector('#upload-file');
 const photoEditorForm = uploadForm.querySelector('.img-upload__overlay');
 const photoEditorResetBtn = photoEditorForm.querySelector('#upload-cancel');
-
 const hashtagInput = uploadForm.querySelector('.text__hashtags');
 const commentInput = uploadForm.querySelector('.text__description');
-
-export const img = uploadForm.querySelector('.img-upload__preview img');
-const scaleControl = uploadForm.querySelector('.scale__control--value');
-const smaller = uploadForm.querySelector('.scale__control--smaller');
-const bigger = uploadForm.querySelector('.scale__control--bigger');
-
-let scale = 1;
-
-const updateScale = () => {
-  img.style.transform = `scale(${scale})`;
-  scaleControl.value   = `${scale * 100}%`;
-};
+const submitButton = uploadForm.querySelector('.img-upload__submit');
 
 const onPhotoEditorResetBtnClick = (evt) => {
   evt.preventDefault();
@@ -40,7 +28,7 @@ const onDocumentKeydown = (evt) => {
       closePhotoEditor();
     }
   }
-};//
+};
 
 function closePhotoEditor() {
   photoEditorForm.classList.add('hidden');
@@ -63,25 +51,25 @@ export const initUploadModal = () => {
   });
 };
 
+const blockSubmit = (isBlocked = true) => {
+  submitButton.disabled = isBlocked;
+  submitButton.textContent = isBlocked ? submitText.SENDING : submitText.IDLE;
+}
 
 uploadForm.addEventListener('submit', (evt) => {
-  if (!isValid())
-    evt.preventDefault();
+  evt.preventDefault();
+  if (isValid()) {
+    blockSubmit();
+    sendData(new FormData(uploadForm))
+      .then(() => {
+        closePhotoEditor();
+        showPopup(Popups.SUCCESS)
+      })
+      .catch(() => {
+        showPopup(Popups.ERROR)
+      })
+      .finally(() => {
+        blockSubmit(false)
+      })
+  }
 })
-
-const onSmallerClick = () => {
-  if (scale > SCALE_MIN) {
-    scale = Math.max(scale - SCALE_STEP, SCALE_MIN);
-    updateScale();
-  }
-};
-
-const onBiggerClick = () => {
-  if (scale < SCALE_MAX) {
-    scale = Math.min(scale + SCALE_STEP, SCALE_MAX);
-    updateScale();
-  }
-};
-
-smaller.addEventListener('click', onSmallerClick);
-bigger.addEventListener('click', onBiggerClick);
