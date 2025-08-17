@@ -1,37 +1,10 @@
-export const MESSAGES = [
-  'Всё отлично!',
-  'В целом всё неплохо. Но не всё.',
-  'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
-  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
-  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
-  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
-];
-
-export const NAMES = ['Артём', 'Настя', 'Владимир', 'Мария', 'Игорь', 'Светлана', 'Алексей', 'Даша', 'Михаил', 'Оля'];
-
-export const DESCRIPTIONS = [
-  'Отличный день',
-  'Хорошее утро',
-  'День идет неплохо'
-];
-
-export const AVATAR_MIN = 1;
-export const AVATAR_MAX = 6;
-
-export const COMMENT_MIN = 0;
-export const COMMENT_MAX = 30;
-
-export const LIKES_MIN = 15;
-export const LIKES_MAX = 200;
-
-export const TOTAL_CARDS = 25;
-
 export const MAX_SYMBOLS = 20;
 export const MAX_HASHTAGS = 5;
 export const MAX_COMMENT_LENGTH = 140;
 export const SCALE_STEP = 0.25;
 export const SCALE_MIN = 0.25;
 export const SCALE_MAX = 1;
+export const DELAY = 5000;
 
 export const EFFECTS = {
   none: {
@@ -90,3 +63,12 @@ export const EFFECTS = {
   },
 };
 
+export const Popups = {
+  SUCCESS: 'success',
+  ERROR: 'error'
+};
+
+export const submitText = {
+  IDLE: 'Опубликовать',
+  SENDING: 'Публикую...'
+}

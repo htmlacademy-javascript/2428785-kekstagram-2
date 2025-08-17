@@ -1,10 +1,7 @@
-function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+import { DELAY } from "./constants";
 
-function getRandomArrayItem(array) {
-  return array[getRandomInt(0, array.length - 1)];
-}
+const alertTemplate = document.querySelector('#data-error').content.querySelector('.data-error');
+const body = document.body;
 
 export const numDecline = (num, nominative, genitiveSingular, genitivePlural) => {
   if (num % 10 === 0 || num % 100 > 4 && num % 100 < 21) {
@@ -15,7 +12,11 @@ export const numDecline = (num, nominative, genitiveSingular, genitivePlural) =>
     : genitiveSingular;
 };
 
-export {
-  getRandomInt,
-  getRandomArrayItem
+export const showAlert = () => {
+  const alert = alertTemplate.cloneNode(true);
+  body.append(alert)
+
+  setTimeout(() => {
+    alert.remove();
+  }, DELAY)
 }
