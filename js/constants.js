@@ -7,6 +7,9 @@ export const SCALE_MAX = 1;
 export const DELAY = 5000;
 export const RANDOM_LIMIT = 10;
 export const RANDOM_MIDPOINT = 0.5;
+export const SCALE_FACTOR = 100;
+export const DEFAULT_EFFECT = 'none';
+export const COUNT_STEP = 5;
 
 export const Filters = {
   DEFAULT: 'filter-default',

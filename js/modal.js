@@ -1,4 +1,5 @@
-const COUNT_STEP = 5;
+import { COUNT_STEP } from './constants.js';
+import { removeEscapeControl, setEscapeControl } from './escape-control.js';
 
 const bigPictureNode = document.querySelector('.big-picture');
 const bigPictureImgNode = bigPictureNode.querySelector('.big-picture__img').querySelector('img');
@@ -18,11 +19,7 @@ socialCommentsNode.innerHTML = '';
 
 const onBigPictureCancelClick = () => {
   closeBigPicture();
-};
-const onEscKeydown = (evt) => {
-  if (evt.key === 'Escape') {
-    closeBigPicture();
-  }
+  removeEscapeControl();
 };
 
 const renderNextComments = () => {
@@ -57,13 +54,13 @@ const clearComments = () => {
   commentsLoaderNode.removeEventListener('click', renderNextComments);
 };
 
-const closeBigPicture = () => {
+function closeBigPicture() {
   clearComments();
 
   bigPictureNode.classList.add('hidden');
+  document.body.classList.remove('modal-open');
   bigPictureCancelNode.removeEventListener('click', onBigPictureCancelClick);
-  document.removeEventListener('keydown', onEscKeydown);
-};
+}
 
 export const openBigPicture = (currentPhoto) => {
 
@@ -78,12 +75,11 @@ export const openBigPicture = (currentPhoto) => {
   bigPictureNode.classList.remove('hidden');
   bigPictureCancelNode.addEventListener('click', onBigPictureCancelClick);
   document.body.classList.add('modal-open');
-  document.addEventListener('keydown', onEscKeydown);
+  setEscapeControl(closeBigPicture);
 };
 
 function renderComments(currentPhotoComments) {
   comments = currentPhotoComments;
   renderNextComments();
-
   commentsLoaderNode.addEventListener('click', renderNextComments);
 }
