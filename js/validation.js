@@ -1,5 +1,5 @@
-import { MAX_SYMBOLS, MAX_HASHTAGS, MAX_COMMENT_LENGTH } from "./constants.js";
-import { numDecline } from "./utils.js";
+import { MAX_SYMBOLS, MAX_HASHTAGS, MAX_COMMENT_LENGTH } from './constants.js';
+import { numDecline } from './utils.js';
 
 const uploadForm = document.querySelector('.img-upload__form');
 const hashtagInput = uploadForm.querySelector('.text__hashtags');
@@ -51,29 +51,27 @@ const isHashtagsValid = (value) => {
     },
     {
       check: inputArray.length > MAX_HASHTAGS,
-      error: `Нельзя указать больше ${MAX_HASHTAGS} ${
-        numDecline(
-          MAX_HASHTAGS, 'хэштега', 'хэштегов', 'хэштегов'
+      error: `Нельзя указать больше ${MAX_HASHTAGS} ${numDecline(
+        MAX_HASHTAGS, 'хэштега', 'хэштегов', 'хэштегов'
       )}`,
     },
-  ]
+  ];
 
-return rules.every((rule) => {
-  const isInvalid = rule.check;
-  if (isInvalid) {
-    errorMessage = rule.error;
-  }
-  return !isInvalid;
-});
+  return rules.every((rule) => {
+    const isInvalid = rule.check;
+    if (isInvalid) {
+      errorMessage = rule.error;
+    }
+    return !isInvalid;
+  });
 };
 
 const isCommentValid = (value) => {
   errorMessage = '';
   if (value.length > MAX_COMMENT_LENGTH) {
-    errorMessage = `Длина комментария не может составлять больше ${MAX_COMMENT_LENGTH} ${
-        numDecline(
-          MAX_COMMENT_LENGTH, 'символа', 'символов', 'символов'
-      )}`;
+    errorMessage = `Длина комментария не может составлять больше ${MAX_COMMENT_LENGTH} ${numDecline(
+      MAX_COMMENT_LENGTH, 'символа', 'символов', 'символов'
+    )}`;
     return false;
   }
   return true;
@@ -85,5 +83,5 @@ pristine.addValidator(commentInput, isCommentValid, error, 2, false);
 export const isValid = () => pristine.validate();
 
 export const resetValidation = () => {
-    pristine.reset();
-}
+  pristine.reset();
+};

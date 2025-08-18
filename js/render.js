@@ -1,18 +1,24 @@
-import { openBigPicture } from "./modal.js";
+import { openBigPicture } from './modal.js';
 
 const cardTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const container = document.querySelector('.pictures');
 
 let localPhotos;
 
+const clearCards = () => {
+  document.querySelectorAll('.picture').forEach((card) => {
+    card.remove();
+  });
+};
+
 export const renderCards = (pictures) => {
-  console.log(pictures)
   localPhotos = [...pictures];
+  clearCards();
   const fragment = document.createDocumentFragment();
 
   pictures.forEach(({ id, url, description, likes, comments }) => {
-    const card = cardTemplate.cloneNode(true)
-    const image = card.querySelector('.picture__img')
+    const card = cardTemplate.cloneNode(true);
+    const image = card.querySelector('.picture__img');
 
     card.dataset.pictureId = id;
     image.src = url;
@@ -24,7 +30,7 @@ export const renderCards = (pictures) => {
   });
 
   container.append(fragment);
-}
+};
 
 
 container.addEventListener('click', (evt) => {
@@ -34,6 +40,6 @@ container.addEventListener('click', (evt) => {
     evt.preventDefault();
     const pictureId = currentPictureNode.dataset.pictureId;
     const currentPhoto = localPhotos.find((photo) => photo.id === Number(pictureId));
-    openBigPicture(currentPhoto)
+    openBigPicture(currentPhoto);
   }
-})
+});

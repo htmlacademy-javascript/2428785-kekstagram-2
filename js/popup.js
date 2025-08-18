@@ -1,4 +1,4 @@
-import { Popups } from "./constants.js"
+import { Popups } from './constants.js';
 
 const successTemplate = document.querySelector(`#${Popups.SUCCESS}`).content.querySelector(`.${Popups.SUCCESS}`);
 const errorTemplate = document.querySelector(`#${Popups.ERROR}`).content.querySelector(`.${Popups.ERROR}`);
@@ -16,5 +16,5 @@ export const showPopup = (type) => {
     if (target.classList.contains(type) || target.classList.contains(`${type}__button`)) {
       popup.remove();
     }
-  })
-}
+  });
+};

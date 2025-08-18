@@ -25,6 +25,38 @@ const onEscKeydown = (evt) => {
   }
 };
 
+const renderNextComments = () => {
+  const socialCommentsFragment = document.createDocumentFragment();
+  const renderedComments = comments.slice(currentCount, currentCount + COUNT_STEP);
+  const renderedCommentsLength = renderedComments.length + currentCount;
+
+  renderedComments.forEach((comment) => {
+    const socialCommentNode = socialCommentsTemplate.cloneNode(true);
+
+    socialCommentNode.querySelector('.social__picture').src = comment.avatar;
+    socialCommentNode.querySelector('.social__picture').alt = comment.name;
+    socialCommentNode.querySelector('.social__text').textContent = comment.message;
+
+    socialCommentsFragment.appendChild(socialCommentNode);
+  });
+  socialCommentsNode.appendChild(socialCommentsFragment);
+
+  renderedStatisticNode.textContent = renderedCommentsLength;
+
+  if (renderedCommentsLength >= comments.length) {
+    commentsLoaderNode.classList.add('hidden');
+  }
+
+  currentCount += COUNT_STEP;
+};
+
+const clearComments = () => {
+  currentCount = 0;
+  socialCommentsNode.innerHTML = '';
+  commentsLoaderNode.classList.remove('hidden');
+  commentsLoaderNode.removeEventListener('click', renderNextComments);
+};
+
 const closeBigPicture = () => {
   clearComments();
 
@@ -49,41 +81,9 @@ export const openBigPicture = (currentPhoto) => {
   document.addEventListener('keydown', onEscKeydown);
 };
 
-const renderNextComments = () => {
-  const socialCommentsFragment = document.createDocumentFragment();
-  const renderedComments = comments.slice(currentCount, currentCount + COUNT_STEP)
-  const renderedCommentsLength = renderedComments.length + currentCount;
-
-  renderedComments.forEach((comment) => {
-    const socialCommentNode = socialCommentsTemplate.cloneNode(true);
-
-    socialCommentNode.querySelector('.social__picture').src = comment.avatar;
-    socialCommentNode.querySelector('.social__picture').alt = comment.name;
-    socialCommentNode.querySelector('.social__text').textContent = comment.message;
-
-    socialCommentsFragment.appendChild(socialCommentNode)
-  });
-  socialCommentsNode.appendChild(socialCommentsFragment);
-
-  renderedStatisticNode.textContent = renderedCommentsLength;
-
-  if (renderedCommentsLength >= comments.length) {
-    commentsLoaderNode.classList.add('hidden');
-  }
-
-  currentCount += COUNT_STEP;
-};
-
-const clearComments = () => {
-  currentCount = 0;
-  socialCommentsNode.innerHTML = '';
-  commentsLoaderNode.classList.remove('hidden');
-  commentsLoaderNode.removeEventListener('click', renderNextComments);
-};
-
 function renderComments(currentPhotoComments) {
   comments = currentPhotoComments;
   renderNextComments();
 
   commentsLoaderNode.addEventListener('click', renderNextComments);
-};
+}
