@@ -1,4 +1,4 @@
-import { DELAY } from "./constants";
+import { DELAY } from './constants';
 
 const alertTemplate = document.querySelector('#data-error').content.querySelector('.data-error');
 const body = document.body;
@@ -14,9 +14,18 @@ export const numDecline = (num, nominative, genitiveSingular, genitivePlural) =>
 
 export const showAlert = () => {
   const alert = alertTemplate.cloneNode(true);
-  body.append(alert)
+  body.append(alert);
 
   setTimeout(() => {
     alert.remove();
-  }, DELAY)
-}
+  }, DELAY);
+};
+
+export const debounce = (callback, timeoutDelay = 500) => {
+  let timeoutId;
+
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};

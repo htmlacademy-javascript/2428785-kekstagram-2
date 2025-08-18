@@ -8,10 +8,10 @@ export const getData = () => fetch('https://31.javascript.htmlacademy.pro/keksta
 
 export const sendData = (body) => fetch('https://31.javascript.htmlacademy.pro/kekstagram/', {
   method: 'POST',
-  body
+  body,
 })
   .then((response) => {
     if (!response.ok) {
       throw new Error();
     }
-  })
+  });

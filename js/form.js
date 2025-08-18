@@ -1,8 +1,9 @@
-import { sendData } from "./api.js";
-import { Popups, submitText } from "./constants.js";
-import { showPopup } from "./popup.js";
-import { isValid, resetValidation } from "./validation.js";
+import { sendData } from './api.js';
+import { Popups, submitText } from './constants.js';
+import { showPopup } from './popup.js';
+import { isValid, resetValidation } from './validation.js';
 
+const uploadForm = document.querySelector('.img-upload__form');
 const pageBody = document.querySelector('body');
 const uploadFileControl = uploadForm.querySelector('#upload-file');
 const photoEditorForm = uploadForm.querySelector('.img-upload__overlay');
@@ -39,8 +40,8 @@ function closePhotoEditor() {
   uploadForm.reset();
 
 
-  resetValidation()
-};
+  resetValidation();
+}
 
 export const initUploadModal = () => {
   uploadFileControl.addEventListener('change', () => {
@@ -54,7 +55,7 @@ export const initUploadModal = () => {
 const blockSubmit = (isBlocked = true) => {
   submitButton.disabled = isBlocked;
   submitButton.textContent = isBlocked ? submitText.SENDING : submitText.IDLE;
-}
+};
 
 uploadForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
@@ -63,13 +64,13 @@ uploadForm.addEventListener('submit', (evt) => {
     sendData(new FormData(uploadForm))
       .then(() => {
         closePhotoEditor();
-        showPopup(Popups.SUCCESS)
+        showPopup(Popups.SUCCESS);
       })
       .catch(() => {
-        showPopup(Popups.ERROR)
+        showPopup(Popups.ERROR);
       })
       .finally(() => {
-        blockSubmit(false)
-      })
+        blockSubmit(false);
+      });
   }
-})
+});

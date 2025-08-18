@@ -1,6 +1,7 @@
 import { EFFECTS } from './constants.js';
-import { img } from './form.js';
 
+const uploadForm = document.querySelector('.img-upload__form');
+const img = uploadForm.querySelector('.img-upload__preview img');
 const sliderContainer = document.querySelector('.img-upload__effect-level');
 const effectValue = document.querySelector('.effect-level__value');
 const sliderElement = document.querySelector('.effect-level__slider');
@@ -39,7 +40,7 @@ const updateSlider = (effectName) => {
       effectValue.value = effect.start;
     }
   }
-}
+};
 
 sliderElement.noUiSlider.on('update', (values, handle) => {
   const value = values[handle];
@@ -50,7 +51,9 @@ sliderElement.noUiSlider.on('update', (values, handle) => {
 });
 
 effectsList.addEventListener('change', (evt) => {
-  if (!evt.target.classList.contains('effects__radio')) return;
+  if (!evt.target.classList.contains('effects__radio')) {
+    return;
+  }
 
   currentEffect = evt.target.value;
   updateSlider(currentEffect);

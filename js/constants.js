@@ -5,6 +5,14 @@ export const SCALE_STEP = 0.25;
 export const SCALE_MIN = 0.25;
 export const SCALE_MAX = 1;
 export const DELAY = 5000;
+export const RANDOM_LIMIT = 10;
+export const RANDOM_MIDPOINT = 0.5;
+
+export const Filters = {
+  DEFAULT: 'filter-default',
+  RANDOM: 'filter-random',
+  DISCUSSED: 'filter-discussed'
+};
 
 export const EFFECTS = {
   none: {
@@ -71,4 +79,4 @@ export const Popups = {
 export const submitText = {
   IDLE: 'Опубликовать',
   SENDING: 'Публикую...'
-}
+};
