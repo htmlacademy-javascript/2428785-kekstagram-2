@@ -18,7 +18,7 @@ const isHashtagsValid = (value) => {
 
   const inputText = value.toLowerCase().trim();
 
-  if (!inputText.length === 0) {
+  if (!inputText.length) {
     return true;
   }
 
