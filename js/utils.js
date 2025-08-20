@@ -3,7 +3,7 @@ import { DELAY } from './constants.js';
 const alertTemplate = document.querySelector('#data-error').content.querySelector('.data-error');
 const body = document.body;
 
-export const numDecline = (num, nominative, genitiveSingular, genitivePlural) => {
+export const declineNumber = (num, nominative, genitiveSingular, genitivePlural) => {
   if (num % 10 === 0 || num % 100 > 4 && num % 100 < 21) {
     return genitivePlural;
   }
