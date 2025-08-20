@@ -22,10 +22,6 @@ const onBigPictureCancelClick = () => {
   removeEscapeControl();
 };
 
-const onCommentsLoaderNodeClick = () => {
-  renderNextComments();
-}
-
 const renderNextComments = () => {
   const socialCommentsFragment = document.createDocumentFragment();
   const renderedComments = comments.slice(currentCount, currentCount + COUNT_STEP);
@@ -51,6 +47,9 @@ const renderNextComments = () => {
   currentCount += COUNT_STEP;
 };
 
+const onCommentsLoaderNodeClick = () => {
+  renderNextComments();
+};
 
 const clearComments = () => {
   currentCount = 0;
