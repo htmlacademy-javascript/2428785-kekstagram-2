@@ -22,6 +22,10 @@ const onBigPictureCancelClick = () => {
   removeEscapeControl();
 };
 
+const onCommentsLoaderNodeClick = () => {
+  renderNextComments();
+}
+
 const renderNextComments = () => {
   const socialCommentsFragment = document.createDocumentFragment();
   const renderedComments = comments.slice(currentCount, currentCount + COUNT_STEP);
@@ -47,11 +51,12 @@ const renderNextComments = () => {
   currentCount += COUNT_STEP;
 };
 
+
 const clearComments = () => {
   currentCount = 0;
   socialCommentsNode.innerHTML = '';
   commentsLoaderNode.classList.remove('hidden');
-  commentsLoaderNode.removeEventListener('click', renderNextComments);
+  commentsLoaderNode.removeEventListener('click', onCommentsLoaderNodeClick);
 };
 
 function closeBigPicture() {
@@ -81,5 +86,5 @@ export const openBigPicture = (currentPhoto) => {
 function renderComments(currentPhotoComments) {
   comments = currentPhotoComments;
   renderNextComments();
-  commentsLoaderNode.addEventListener('click', renderNextComments);
+  commentsLoaderNode.addEventListener('click', onCommentsLoaderNodeClick);
 }
